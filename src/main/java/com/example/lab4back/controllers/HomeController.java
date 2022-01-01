@@ -1,19 +1,18 @@
 package com.example.lab4back.controllers;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@Controller
-public class HomeController {
+@Configuration
+@EnableWebMvc
+public class HomeController implements WebMvcConfigurer {
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
     }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
 }

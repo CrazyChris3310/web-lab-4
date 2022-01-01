@@ -1,21 +1,15 @@
 package com.example.lab4back.data;
 
 import com.example.lab4back.beans.PointData;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import javax.transaction.Transactional;
 import java.util.List;
 
-@Component
-public class PointDataRepository {
-
-    private final List<PointData> points = new ArrayList<>();
-
-    public List<PointData> findAll() {
-        return points;
-    }
-
-    public void addPoint(PointData point) {
-        points.add(point);
-    }
+@Repository
+public interface PointDataRepository extends JpaRepository<PointData, Long> {
+    List<PointData> findAllByUsername(String username);
+    @Transactional
+    void deleteByUsername(String username);
 }
